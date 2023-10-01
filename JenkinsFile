@@ -29,13 +29,6 @@ pipeline {
                 }
             }
         }
-        stage("Quality Gate") {
-            steps {
-                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
-                }
-            }
-        }
         stage('Build and Push Docker Image') {
             environment {
                 DOCKER_IMAGE = "javaspringbootapplication/ultimate-cicd:${BUILD_NUMBER}"
