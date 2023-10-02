@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     // Define the Docker image tag
-                    def DOCKER_IMAGE = "abhishekf5/ultimate-cicd:${BUILD_NUMBER}"
+                    def DOCKER_IMAGE = "satish/ultimate-cicd:${BUILD_NUMBER}"
 
                     // Build the Docker image with the corrected Dockerfile location
                     sh "docker build -t ${DOCKER_IMAGE} -f Dockerfile ."
@@ -64,8 +64,8 @@ pipeline {
                     git config user.email "satishjagana123@gmail.com"
                     git config user.name "Sathishjagana123"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" JavaSpringboot_application/deployment.yml
-                    git add JavaSpringboot_application/deployment.yml
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yml
+                    git add deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                     '''
